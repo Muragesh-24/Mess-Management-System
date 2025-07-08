@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
+const Admin = require('../models/Admin');
 const { verifyPassword, generateToken, hashPassword } = require('../utils/auth');
 const connectDB = require('../utils/mongodb');
 const { authenticateUser } = require('../utils/middleware');
@@ -9,13 +10,20 @@ const { authenticateUser } = require('../utils/middleware');
 router.post('/login', async (req, res) => {
   try {
     await connectDB();
-    const { rollNo, password } = req.body;
+    const { rollNo, hallNo, password } = req.body;
 
-    if (!rollNo || !password) {
-      return res.status(400).json({ error: 'Roll number and password are required' });
+    if ((!rollNo && !hallNo) || !password) {
+      return res.status(400).json({ error: 'Roll number or Hall number and password are required' });
     }
 
-    const user = await User.findOne({ rollNo });
+    let user;
+    if (rollNo) {
+      user = await User.findOne({ rollNo });
+    } else if (hallNo) {
+      user = await Admin.findOne({ hallNo });
+      console.log('Admin found:', user);
+    }
+
     if (!user) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
@@ -33,7 +41,9 @@ router.post('/login', async (req, res) => {
         _id: user._id,
         name: user.name,
         rollNo: user.rollNo,
+        hallNo: user.hallNo,
         walletBalance: user.walletBalance,
+        role: user.role,
       },
     });
   } catch (error) {
@@ -86,6 +96,7 @@ router.post('/register', async (req, res) => {
 // GET /api/auth/me
 router.get('/me', authenticateUser, async (req, res) => {
   try {
+    // req.user is set by authenticateUser middleware and can be a User or Admin
     return res.json(req.user);
   } catch (error) {
     return res.status(500).json({ error: 'Internal server error' });
