@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Loader2 } from 'lucide-react';
 
-export default function ProtectedRoute({ children }) {
+export default function ProtectedRoute({ children, requiredRole }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
@@ -27,6 +27,10 @@ export default function ProtectedRoute({ children }) {
 
         if (response.ok) {
           const userData = await response.json();
+          if (requiredRole && userData.role !== requiredRole) {
+            router.push(userData.role === 'manager' ? '/manager/dashboard' : '/dashboard');
+            return;
+          }
           setUser(userData);
         } else {
           localStorage.removeItem('token');
@@ -41,7 +45,7 @@ export default function ProtectedRoute({ children }) {
     };
 
     checkAuth();
-  }, [router]);
+  }, [router, requiredRole]);
 
   if (loading) {
     return (
