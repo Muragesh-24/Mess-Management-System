@@ -14,6 +14,15 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  role: {
+    type: String,
+    enum: ['user', 'manager'],
+    default: 'user',
+  },
+  hallNo: {
+    type: String,
+    required: function() { return this.role === 'manager'; },
+  },
   walletBalance: {
     type: Number,
     default: 0,
