@@ -2,6 +2,7 @@
 const { verifyToken } = require('./auth');
 const connectDB = require('./mongodb');
 const User = require('../models/User');
+const Admin = require('../models/Admin');
 
 async function authenticateUser(req, res, next) {
   try {
@@ -18,9 +19,12 @@ async function authenticateUser(req, res, next) {
     }
 
     await connectDB();
-    const user = await User.findById(decoded.userId).select('-password');
+    let user = await User.findById(decoded.userId).select('-password');
     if (!user) {
-      return res.status(401).json({ error: 'User not found' });
+      user = await Admin.findById(decoded.userId).select('-password');
+      if (!user) {
+        return res.status(401).json({ error: 'User not found' });
+      }
     }
 
     req.user = user;
