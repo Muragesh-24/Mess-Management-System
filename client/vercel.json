@@ -1,14 +1,15 @@
 {
   "version": 2,
-  "functions": {
-    "api/**/*.js": {
-      "runtime": "vercel/node@20.x"
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/next"
     }
-  },
+  ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/bin/www"
+      "dest": "/$1"
     }
   ]
 }
