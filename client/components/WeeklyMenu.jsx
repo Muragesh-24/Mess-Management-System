@@ -120,7 +120,7 @@ export default function WeeklyMenu({
                 weeklyMeals[day.key].map((meal) => (
                   <Card key={meal._id} className="mb-4">
                     <CardContent className="p-4">
-                      <div className="font-semibold mb-1">{meal.menuItems.join(", ")}</div>
+                      <div className="font-semibold mb-1">{Array.isArray(meal.menuItems) ? meal.menuItems.join(", ") : (meal.menuItems ? String(meal.menuItems) : "")}</div>
                       <div className="text-orange-600 font-bold">₹{meal.price}</div>
                       <div className="text-xs text-gray-500 mt-1">{meal.hallName}</div>
                     </CardContent>

@@ -275,7 +275,7 @@ const getMealTypeIcon = (mealType) => {
                                   Menu Items
                                 </h4>
                                 <div className="flex flex-wrap gap-1">
-                                  {booking.mealId?.menuItems?.length > 0 ? (
+                                  {Array.isArray(booking.mealId?.menuItems) && booking.mealId.menuItems.length > 0 ? (
                                     booking.mealId.menuItems.map((item, index) => (
                                       <Badge key={index} variant="outline" className="text-xs">
                                         {item}

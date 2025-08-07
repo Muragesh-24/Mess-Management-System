@@ -332,7 +332,7 @@ export default function BookingPage() {
                             </div>
                             <div className="font-bold text-base mb-1 capitalize dark:text-white">{meal.mealType}</div>
                             <div className="text-gray-600 dark:text-gray-300 text-sm mb-2">
-                              {meal.menuItems.join(', ')}
+                              {Array.isArray(meal.menuItems) ? meal.menuItems.join(', ') : (meal.menuItems ? String(meal.menuItems) : '')}
                             </div>
                           </div>
                           <div className="flex items-center justify-between mt-2">
