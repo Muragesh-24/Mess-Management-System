@@ -7,9 +7,9 @@ import { Loader2, Search, BarChart2, Users, CalendarDays, Edit2, CheckCircle, XC
 import ProtectedRoute from '../../../components/ProtectedRoute.jsx';
 
 function MealEditModal({ meal, open, onClose, onSave }) {
-  const [menuItems, setMenuItems] = useState(meal ? meal.menuItems.join(', ') : '');
+  const [menuItems, setMenuItems] = useState(meal ? (Array.isArray(meal.menuItems) ? meal.menuItems.join(', ') : String(meal.menuItems || '')) : '');
   useEffect(() => {
-    setMenuItems(meal ? meal.menuItems.join(', ') : '');
+    setMenuItems(meal ? (Array.isArray(meal.menuItems) ? meal.menuItems.join(', ') : String(meal.menuItems || '')) : '');
   }, [meal]);
   if (!open || !meal) return null;
   return (
@@ -317,7 +317,7 @@ function ManagerDashboard() {
                         <Edit2 className="h-5 w-5" />
                       </button>
                     </div>
-                    <div className="text-gray-700 text-sm mb-2">Menu: <span className="font-medium text-gray-900">{meal.menuItems.join(', ')}</span></div>
+                    <div className="text-gray-700 text-sm mb-2">Menu: <span className="font-medium text-gray-900">{Array.isArray(meal.menuItems) ? meal.menuItems.join(', ') : String(meal.menuItems || '')}</span></div>
                     <div className="flex items-center gap-2">
                       <span className={`inline-flex items-center px-2 py-1 rounded text-xs font-semibold ${meal.available ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
                         {meal.available ? <CheckCircle className="h-4 w-4 mr-1" /> : <XCircle className="h-4 w-4 mr-1" />}
