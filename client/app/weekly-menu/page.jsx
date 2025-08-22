@@ -12,7 +12,7 @@ export default function WeeklyMenuPage() {
   useEffect(() => {
     const fetchHalls = async () => {
       const token = localStorage.getItem("token");
-      const res = await fetch("http://localhost:5000/api/halls", {
+      const res = await fetch("https://mess-management-system-opsl.onrender.com/api/halls", {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (res.ok) {

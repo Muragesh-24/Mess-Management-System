@@ -35,7 +35,7 @@ export default function DashboardPage() {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        "http://localhost:5000/api/bookings?limit=5",
+        "https://mess-management-system-opsl.onrender.com/api/bookings?limit=5",
         {
           headers: {
             Authorization: `Bearer ${token}`,

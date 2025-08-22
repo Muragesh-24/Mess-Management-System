@@ -44,7 +44,7 @@ export default function HistoryPage() {
       if (filters.startDate) params.append('startDate', filters.startDate.toISOString());
       if (filters.endDate) params.append('endDate', filters.endDate.toISOString());
 
-      const response = await fetch(`http://localhost:5000/api/bookings?${params.toString()}`, {
+      const response = await fetch(`https://mess-management-system-opsl.onrender.com/api/bookings?${params.toString()}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

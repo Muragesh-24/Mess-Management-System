@@ -169,7 +169,7 @@ export default function Navigation({ user }) {
         onSave={async ({ name, rollNo, password }) => {
           try {
             const token = localStorage.getItem('token');
-            const res = await fetch('http://localhost:5000/api/auth/me', {
+            const res = await fetch('https://mess-management-system-opsl.onrender.com/api/auth/me', {
               method: 'PATCH',
               headers: {
                 'Content-Type': 'application/json',

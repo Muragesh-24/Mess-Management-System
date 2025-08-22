@@ -68,7 +68,7 @@ function ManagerDashboard() {
     try {
       const token = localStorage.getItem('token');
       if (!token) return;
-      const response = await fetch('http://localhost:5000/api/bookings/hall/stats', {
+      const response = await fetch('https://mess-management-system-opsl.onrender.com/api/bookings/hall/stats', {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (response.ok) {
@@ -91,7 +91,7 @@ function ManagerDashboard() {
       if (date) params.append('date', date);
       if (mealType) params.append('mealType', mealType);
       if (search) params.append('search', search);
-      const response = await fetch(`http://localhost:5000/api/bookings/hall?${params.toString()}`, {
+      const response = await fetch(`https://mess-management-system-opsl.onrender.com/api/bookings/hall?${params.toString()}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -113,7 +113,7 @@ function ManagerDashboard() {
     try {
       const token = localStorage.getItem('token');
       if (!token) return;
-      const response = await fetch('http://localhost:5000/api/meals', {
+      const response = await fetch('https://mess-management-system-opsl.onrender.com/api/meals', {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (response.ok) {
@@ -127,7 +127,7 @@ function ManagerDashboard() {
 
   const updateMealAvailability = async (meal, available) => {
     const token = localStorage.getItem('token');
-    await fetch(`http://localhost:5000/api/meals/${meal._id}/availability`, {
+    await fetch(`https://mess-management-system-opsl.onrender.com/api/meals/${meal._id}/availability`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
       body: JSON.stringify({ available }),
@@ -137,7 +137,7 @@ function ManagerDashboard() {
 
   const updateMealMenu = async (meal, menuItems) => {
     const token = localStorage.getItem('token');
-    await fetch(`http://localhost:5000/api/meals/${meal._id}/menu`, {
+    await fetch(`https://mess-management-system-opsl.onrender.com/api/meals/${meal._id}/menu`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
       body: JSON.stringify({ menuItems }),

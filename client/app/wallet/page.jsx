@@ -28,7 +28,7 @@ export default function WalletPage() {
   const fetchWalletData = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/wallet', {
+      const response = await fetch('https://mess-management-system-opsl.onrender.com/api/wallet', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -65,7 +65,7 @@ export default function WalletPage() {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/wallet', {
+      const response = await fetch('https://mess-management-system-opsl.onrender.com/api/wallet', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -39,7 +39,7 @@ export default function WeeklyMenu({
           // Fetch for all halls
           for (const hall of halls) {
             const res = await fetch(
-              `http://localhost:5000/api/meals?hallName=${encodeURIComponent(hall.name)}&day=${day.key}&mealType=${selectedMealType}`,
+              `https://mess-management-system-opsl.onrender.com/api/meals?hallName=${encodeURIComponent(hall.name)}&day=${day.key}&mealType=${selectedMealType}`,
               { headers: { Authorization: `Bearer ${token}` } }
             );
             if (res.ok) {
@@ -53,7 +53,7 @@ export default function WeeklyMenu({
           const hallObj = halls.find((h) => h._id === selectedHall);
           if (hallObj) {
             const res = await fetch(
-              `http://localhost:5000/api/meals?hallName=${encodeURIComponent(hallObj.name)}&day=${day.key}&mealType=${selectedMealType}`,
+              `https://mess-management-system-opsl.onrender.com/api/meals?hallName=${encodeURIComponent(hallObj.name)}&day=${day.key}&mealType=${selectedMealType}`,
               { headers: { Authorization: `Bearer ${token}` } }
             );
             if (res.ok) {

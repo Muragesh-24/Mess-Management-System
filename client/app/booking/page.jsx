@@ -58,7 +58,7 @@ export default function BookingPage() {
   const fetchHalls = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("http://localhost:5000/api/halls", {
+      const response = await fetch("https://mess-management-system-opsl.onrender.com/api/halls", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -80,7 +80,7 @@ export default function BookingPage() {
 
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("http://localhost:5000/api/bookings", {
+      const response = await fetch("https://mess-management-system-opsl.onrender.com/api/bookings", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -131,7 +131,7 @@ export default function BookingPage() {
         }
         const dayName = selectedDate.toLocaleDateString("en-US", { weekday: "long" }).toLowerCase();
         const token = localStorage.getItem("token");
-        const res = await fetch(`http://localhost:5000/api/meals?hallName=${encodeURIComponent(hallObj.name)}&day=${dayName}&mealType=${selectedMealType}`,
+        const res = await fetch(`https://mess-management-system-opsl.onrender.com/api/meals?hallName=${encodeURIComponent(hallObj.name)}&day=${dayName}&mealType=${selectedMealType}`,
           { headers: { Authorization: `Bearer ${token}` } });
         if (res.ok) {
           const data = await res.json();
@@ -156,7 +156,7 @@ export default function BookingPage() {
     setBookingLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("http://localhost:5000/api/bookings", {
+      const response = await fetch("https://mess-management-system-opsl.onrender.com/api/bookings", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
