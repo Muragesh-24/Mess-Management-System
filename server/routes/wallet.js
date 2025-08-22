@@ -2,13 +2,13 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 const Transaction = require('../models/Transaction');
-const connectDB = require('../utils/mongodb');
+
 const { authenticateUser } = require('../utils/middleware');
 
 // GET /api/wallet
 router.get('/', authenticateUser, async (req, res) => {
   try {
-    await connectDB();
+
     const user = req.user;
     const { page = 1, limit = 10 } = req.query;
     const skip = (parseInt(page) - 1) * parseInt(limit);
@@ -33,7 +33,7 @@ router.get('/', authenticateUser, async (req, res) => {
 // POST /api/wallet
 router.post('/', authenticateUser, async (req, res) => {
   try {
-    await connectDB();
+   
     const user = req.user;
     const { amount } = req.body;
     if (!amount || amount <= 0) {

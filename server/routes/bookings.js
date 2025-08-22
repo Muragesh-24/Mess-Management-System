@@ -4,13 +4,13 @@ const Booking = require('../models/Booking');
 const Meal = require('../models/Meal');
 const User = require('../models/User');
 const Transaction = require('../models/Transaction');
-const connectDB = require('../utils/mongodb');
+
 const { authenticateUser } = require('../utils/middleware');
 
 // GET /api/bookings
 router.get('/', authenticateUser, async (req, res) => {
   try {
-    await connectDB();
+
     const user = req.user;
     const { page = 1, limit = 10, status, mealType, startDate, endDate } = req.query;
     let query = { userId: user._id };
@@ -43,7 +43,7 @@ router.get('/', authenticateUser, async (req, res) => {
 // POST /api/bookings
 router.post('/', authenticateUser, async (req, res) => {
   try {
-    await connectDB();
+
     const user = req.user;
     const { hallId, mealType, date } = req.body;
     if (!hallId || !mealType || !date) {
@@ -109,7 +109,7 @@ router.post('/', authenticateUser, async (req, res) => {
 // GET /api/bookings/hall - For managers to see all bookings for their hall
 router.get('/hall', authenticateUser, async (req, res) => {
   try {
-    await connectDB();
+
     const user = req.user;
     if (user.role !== 'manager' || !user.hallNo) {
       return res.status(403).json({ error: 'Access denied' });
@@ -176,7 +176,7 @@ router.get('/hall', authenticateUser, async (req, res) => {
 // GET /api/bookings/hall/stats - Booking statistics for manager dashboard
 router.get('/hall/stats', authenticateUser, async (req, res) => {
   try {
-    await connectDB();
+
     const user = req.user;
     if (user.role !== 'manager' || !user.hallNo) {
       return res.status(403).json({ error: 'Access denied' });

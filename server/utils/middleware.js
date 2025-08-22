@@ -1,6 +1,6 @@
 // import { NextRequest } from 'next/server';
 const { verifyToken } = require('./auth');
-const connectDB = require('./mongodb');
+
 const User = require('../models/User');
 const Admin = require('../models/Admin');
 
@@ -18,7 +18,6 @@ async function authenticateUser(req, res, next) {
       return res.status(401).json({ error: 'Invalid token' });
     }
 
-    await connectDB();
     let user = await User.findById(decoded.userId).select('-password');
     if (!user) {
       user = await Admin.findById(decoded.userId).select('-password');

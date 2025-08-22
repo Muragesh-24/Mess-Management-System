@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
 
 // Connect to MongoDB and start server
 const PORT = process.env.PORT || 5000;
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/mess_management_system';
+const MONGO_URI = "mongodb+srv://workbharatsharma:VZNFtSY6IHFJzzgt@messdeck.njx0xjb.mongodb.net/mess_management_system";
 
 mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {

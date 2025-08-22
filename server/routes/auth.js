@@ -3,13 +3,13 @@ const router = express.Router();
 const User = require('../models/User');
 const Admin = require('../models/Admin');
 const { verifyPassword, generateToken, hashPassword } = require('../utils/auth');
-const connectDB = require('../utils/mongodb');
+
 const { authenticateUser } = require('../utils/middleware');
 
 // POST /api/auth/login
 router.post('/login', async (req, res) => {
   try {
-    await connectDB();
+
     const { rollNo, hallNo, password } = req.body;
 
     if ((!rollNo && !hallNo) || !password) {
@@ -55,7 +55,7 @@ router.post('/login', async (req, res) => {
 // POST /api/auth/register
 router.post('/register', async (req, res) => {
   try {
-    await connectDB();
+
     const { name, rollNo, password } = req.body;
     if (!name || !rollNo || !password) {
       return res.status(400).json({ error: 'All fields are required' });
@@ -106,7 +106,7 @@ router.get('/me', authenticateUser, async (req, res) => {
 // PATCH /api/auth/me
 router.patch('/me', authenticateUser, async (req, res) => {
   try {
-    await connectDB();
+  
     const { name, rollNo, password } = req.body;
     const update = {};
     if (name) update.name = name;
